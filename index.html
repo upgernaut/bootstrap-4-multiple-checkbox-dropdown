@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="style.css" >
+
+    <title>Bootstrap 4 multiple dropdown</title>
+  </head>
+  <body>
+<div class="dropdown checkbox-menu filterDropdown">
+  <button class="dropdown-toggle custom-select" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li class="dropdown-item">
+      <label><input type="checkbox">Action1</label>
+    </li>
+    <li class="dropdown-item">
+      <label><input type="checkbox">Action2</label>
+    </li>
+    <li class="dropdown-item">
+      <label><input type="checkbox">Action3</label>
+    </li>
+    <li class="dropdown-item">
+      <label><input type="checkbox">Action4</label>
+    </li>
+  </ul>
+</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+	
+	<script>
+$(document).on('click', '.filterDropdown', function(e) {
+  e.stopPropagation();
+});
+
+$(".filterDropdown").on("change", "input[type='checkbox']", function() {
+
+  $(this).closest("li").toggleClass("active", this.checked);
+  let $checked = [];
+  $(this).closest('.filterDropdown').find('li.active label').each(function() {
+    let $item = $("<span>" + $(this).text() + "</span>");
+    $checked.push($item[0].outerHTML);
+  });
+
+  if ($checked.length) {
+
+    $(this).closest('.filterDropdown').find('.dropdown-toggle').html($checked.join(', '));
+  } else {
+
+    $(this).closest('.filterDropdown').find('.dropdown-toggle').text('Select');
+  }
+
+});
+	
+	</script>
+  </body>
+</html>
